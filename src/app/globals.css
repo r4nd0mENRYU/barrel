@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/* Pretendard variable for Korean body */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
+
+:root {
+  /* Newsprint editorial palette — slightly more contrast than AdRecover */
+  --paper: #fafaf6;
+  --paper-elevated: #ffffff;
+  --paper-subtle: #f1ede1;
+  --rule: #d8d2bf;
+  --rule-strong: #b6ad93;
+  --ink: #0e0d0a;
+  --ink-2: #2c2a23;
+  --ink-3: #5d594c;
+  --ink-4: #8c8771;
+
+  --crude: #6e2a1f;          /* deep crude brown — primary accent */
+  --crude-soft: #f1d9cf;
+  --gain: #295e3a;
+  --warn: #b78b1f;
+  --highlight: #c89a3c;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-elevated: var(--paper-elevated);
+  --color-paper-subtle: var(--paper-subtle);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-crude: var(--crude);
+  --color-crude-soft: var(--crude-soft);
+  --color-gain: var(--gain);
+  --color-warn: var(--warn);
+
+  --font-sans:
+    "Pretendard Variable", Pretendard, ui-sans-serif, system-ui, -apple-system,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman",
+    "Apple SD Gothic Neo", "Noto Serif KR", serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Monaco, monospace;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  :lang(ko),
+  :lang(ko) h1,
+  :lang(ko) h2,
+  :lang(ko) h3,
+  :lang(ko) p,
+  :lang(ko) li,
+  :lang(ko) span,
+  :lang(ko) blockquote {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--rule-strong);
+    border: 3px solid var(--paper);
+    border-radius: 999px;
+  }
+}
+
+/* Editorial display heading — serif with WONK + soft */
+.serif {
+  font-family: var(--font-serif);
+  font-feature-settings: "ss01" 1;
+  letter-spacing: -0.018em;
+  line-height: 1.06;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Long-form article body — drop cap, lead, blockquote, callouts */
+.article-body {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.78;
+  color: var(--ink-2);
+}
+.article-body p { margin: 0 0 1.1em; }
+.article-body p.lead { font-size: 22px; line-height: 1.6; color: var(--ink); margin-bottom: 1.4em; }
+.article-body h2 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 2.2em 0 0.6em;
+  letter-spacing: -0.018em;
+}
+.article-body h3 {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 2em 0 0.5em;
+  font-weight: 600;
+}
+.article-body strong { color: var(--ink); font-weight: 600; }
+.article-body em { font-style: italic; color: var(--ink); }
+.article-body ul, .article-body ol { margin: 1em 0 1.4em; padding-left: 1.4em; }
+.article-body li { margin: 0.4em 0; padding-left: 0.2em; }
+.article-body ul { list-style: none; }
+.article-body ul li {
+  position: relative;
+  padding-left: 1.2em;
+}
+.article-body ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--rule-strong);
+}
+.article-body blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 1.6em 0;
+  padding-left: 1.2em;
+  border-left: 2px solid var(--crude);
+}
+.article-body figure {
+  margin: 2em 0;
+  padding: 1.4em 1.6em;
+  background: var(--paper-elevated);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+.article-body figcaption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-top: 0.8em;
+}
+.article-body a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+.article-body a:hover {
+  text-decoration-color: var(--crude);
+}
+.article-body .pull {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1.4;
+  color: var(--ink);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.1em 0;
+  margin: 2em 0;
+}
+.article-body code {
+  font-family: var(--font-mono);
+  background: var(--paper-subtle);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
