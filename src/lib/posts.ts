@@ -12,6 +12,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "brent-118-anatomy",
+    title: "Brent $118의 해부",
+    dek: "4월 29일 +6% 무브를 네 개 층위로 분해한다",
+    publishedAt: "2026-04-30",
+    readMinutes: 9,
+    tags: ["원유", "Brent", "WTI", "호르무즈", "EIA", "옵션"],
+    excerpt:
+      "트럼프의 '핵 합의까지 봉쇄' 한 마디에 Brent가 6% 점프하며 $118.03으로 마감했다. 그러나 그 무브 아래에는 미국 재고 빌드인데도 가격이 오른다는 역설, vol risk premium의 음수 전환, managed money 다년 peak가 동시에 깔려 있다. 같은 날 시장이 보낸 네 개 신호를 분해한다.",
+  },
+  {
     slug: "oil-2q26-outlook",
     title: "오일 가격, 어디로 가는가",
     dek: "호르무즈와 OPEC 사이에서 — 2026년 2분기 시점 정리",
