@@ -14,9 +14,12 @@ const newsreader = Newsreader({
 const SITE = {
   name: "Barrel",
   tagline: "원유와 에너지 시장의 짧은 노트",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://barrel-energy.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://barrel-alpha.vercel.app",
   // AdRecover Korea SDK — site_id_token issued by /dashboard/sites/new
   adrecoverSiteId: process.env.NEXT_PUBLIC_ADRECOVER_SITE_ID || "",
+  // Search engine ownership verification — paste codes from each console.
+  googleVerification: process.env.GOOGLE_SITE_VERIFICATION || "",
+  naverVerification: process.env.NAVER_SITE_VERIFICATION || "",
 };
 
 export const metadata: Metadata = {
@@ -27,7 +30,10 @@ export const metadata: Metadata = {
   },
   description:
     "글로벌 원유 시장과 에너지 가격 동향을 짧은 노트로 정리합니다. WTI·Brent·OPEC·EIA·IEA 데이터 기반 한국어 분석.",
-  alternates: { canonical: SITE.url },
+  alternates: {
+    canonical: SITE.url,
+    types: { "application/rss+xml": [{ url: `${SITE.url}/feed.xml`, title: "Barrel RSS" }] },
+  },
   openGraph: {
     type: "website",
     locale: "ko_KR",
@@ -42,6 +48,33 @@ export const metadata: Metadata = {
     description: "글로벌 원유 시장과 에너지 가격 동향을 짧은 노트로 정리합니다.",
   },
   robots: { index: true, follow: true },
+  ...(SITE.googleVerification || SITE.naverVerification
+    ? {
+        verification: {
+          ...(SITE.googleVerification ? { google: SITE.googleVerification } : {}),
+          ...(SITE.naverVerification ? { other: { "naver-site-verification": SITE.naverVerification } } : {}),
+        },
+      }
+    : {}),
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Barrel",
+  url: SITE.url,
+  description: SITE.tagline,
+  inLanguage: "ko-KR",
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Barrel",
+  url: SITE.url,
+  description: SITE.tagline,
+  inLanguage: "ko-KR",
+  publisher: { "@type": "Organization", name: "Barrel" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -56,6 +89,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             data-site-id={SITE.adrecoverSiteId}
           />
         ) : null}
+        <link rel="alternate" type="application/rss+xml" title="Barrel RSS" href="/feed.xml" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
       </head>
       <body className="min-h-screen antialiased">
         <SiteHeader />
