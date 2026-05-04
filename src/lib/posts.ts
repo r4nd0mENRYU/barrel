@@ -12,6 +12,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "diplomacy-returns-may-week-1",
+    title: "외교가 돌아왔다",
+    dek: "Iran 14-포인트, 첫 post-UAE OPEC+, 그리고 6일 박스권",
+    publishedAt: "2026-05-04",
+    readMinutes: 8,
+    tags: ["원유", "Iran", "OPEC+", "UAE", "외교", "호르무즈"],
+    excerpt:
+      "5월 첫 주, 시장은 정치 헤드라인에 따라 6일 만에 박스권 6%를 그렸다. 5/1 UAE의 OPEC 탈퇴 발효, 5/3 Iran의 14-포인트 협상안 — 호르무즈 개방과 핵을 분리한 카드 — 5/4 첫 post-UAE OPEC+ 회의. 외교 트랙이 다시 켜진 한 주를 정리한다.",
+  },
+  {
     slug: "brent-118-anatomy",
     title: "Brent $118의 해부",
     dek: "4월 29일 +6% 무브를 네 개 층위로 분해한다",
