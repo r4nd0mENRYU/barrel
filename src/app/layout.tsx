@@ -15,8 +15,12 @@ const SITE = {
   name: "Barrel",
   tagline: "원유와 에너지 시장의 짧은 노트",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://barrel-alpha.vercel.app",
-  // AdRecover Korea SDK — site_id_token issued by /dashboard/sites/new
+  // AdRecover Korea SDK — site_id_token issued by /dashboard/sites/new.
   adrecoverSiteId: process.env.NEXT_PUBLIC_ADRECOVER_SITE_ID || "",
+  // First-party proxy directory (matches ADRECOVER_PROXY_PATH on the server route).
+  // When set, the SDK script is served from a publisher-local path that adblock
+  // filter lists cannot generically match.
+  adrecoverProxyPath: process.env.NEXT_PUBLIC_ADRECOVER_PROXY_PATH || "",
   // Search engine ownership verification — paste codes from each console.
   googleVerification: process.env.GOOGLE_SITE_VERIFICATION || "",
   naverVerification: process.env.NAVER_SITE_VERIFICATION || "",
@@ -82,10 +86,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko" className={newsreader.variable}>
       <head>
         {SITE.adrecoverSiteId ? (
+          // First-party path when proxy is configured — survives adblock filter
+          // lists that target the AdRecover origin. Falls back to direct embed
+          // if proxy path env is missing.
           // eslint-disable-next-line @next/next/no-sync-scripts
           <script
             async
-            src="https://adrecover-korea.vercel.app/v1/shield.js"
+            src={
+              SITE.adrecoverProxyPath
+                ? `/${SITE.adrecoverProxyPath}/s.js`
+                : "https://adrecover-korea.vercel.app/v1/shield.js"
+            }
             data-site-id={SITE.adrecoverSiteId}
           />
         ) : null}
